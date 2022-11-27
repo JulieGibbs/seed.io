@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "658086026451",
+    "project_id": "seedio-1bdbb",
+    "storage_bucket": "seedio-1bdbb.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:658086026451:android:a9fcbd0fdb53672c954826",
+        "android_client_info": {
+          "package_name": "com.example.seed"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "658086026451-u8c5epi2fgaeh1p81k3udgcoqtf7cm0r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCEtMe9i3Vt1v9k1IF8DGmslXOfIYl_rBw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "658086026451-u8c5epi2fgaeh1p81k3udgcoqtf7cm0r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
