@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/nav_main"
+    app:startDestination="@id/timelineFragment">
+
+    <fragment
+        android:id="@+id/timelineFragment"
+        android:name="com.example.seed.fragments.TimelineFragment"
+        android:label="fragment_timeline">
+        <action
+            android:id="@+id/action_timelineFragment_to_newPostFragment"
+            app:destination="@id/newPostFragment" />
+        <action
+            android:id="@+id/action_timelineFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/postDetailFragment"
+        android:name="com.example.seed.fragments.PostDetailFragment"
+        android:label="fragment_post_detail">
+        <argument
+            android:name="postId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_postDetailFragment_to_timelineFragment"
+            app:destination="@id/timelineFragment" />
+        <action
+            android:id="@+id/action_postDetailFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/newPostFragment"
+        android:name="com.example.seed.fragments.NewPostFragment"
+        android:label="fragment_new_post">
+        <action
+            android:id="@+id/action_newPostFragment_to_timelineFragment"
+            app:destination="@id/timelineFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.seed.fragments.SettingsFragment"
+        android:label="fragment_settings">
+        <action
+            android:id="@+id/action_settingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.example.seed.fragments.ProfileFragment"
+        android:label="fragment_profile">
+        <action
+            android:id="@+id/action_profileFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_timelineFragment"
+            app:destination="@id/timelineFragment" />
+    </fragment>
+
+
+</navigation>
