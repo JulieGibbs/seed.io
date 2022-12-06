@@ -34,9 +34,9 @@ class TimelineFragment : Fragment() {
             FirebaseFirestore.getInstance().collection("posts")
         )
         //adapter = TempAdapter()
-        binding.timelineRecyclerView.adapter = adapter
+        binding.recyclerPost.adapter = adapter
 
-        binding.btnAddPost.setOnClickListener {
+        binding.fabAddPost.setOnClickListener {
             postViewModel.createPost(
                 Post(body = "Yo template")
             )

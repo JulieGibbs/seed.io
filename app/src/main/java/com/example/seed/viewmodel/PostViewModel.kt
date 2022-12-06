@@ -4,31 +4,38 @@ import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
-import com.example.seed.data.Comment
 import com.example.seed.data.Post
 import com.google.firebase.firestore.*
 
 class PostViewModel(application: Application) : AndroidViewModel(application) {
+
     companion object {
         const val LOG_TAG = "POST_VIEW_MODEL"
-        const val COLLECTION_POSTS = "posts"
-        val TAG = mapOf(0 to "All", // TODO: Move to the correct file accordingly
-            1 to "Fintech",
-            2 to "Web3",
-            3 to "Biotech",
-            4 to "Artificial Intelligence",
-            5 to "Climate Tech",
-            6 to "Education",
-            7 to "Space",
-            8 to "Real Estate"
-        )
+        const val COLLECTION = "posts"
+
+        private val postCollection = FirebaseFirestore.getInstance().collection(COLLECTION)
+
+        fun incrementPostCommentCount(postId: String) {
+            Thread {
+                postCollection
+                    .document(postId).update(mapOf(
+                        "numberOfComments" to FieldValue.increment(1)
+                    ))
+                    .addOnSuccessListener {
+                        Log.d(LOG_TAG, "Successfully increment post $postId number of comments")
+                    }
+                    .addOnFailureListener {
+                        Log.d(LOG_TAG, "${it.message}")
+                    }
+            }.start()
+        }
     }
 
     fun createPost(post: Post){
         Thread {
-            FirebaseFirestore.getInstance().collection(COLLECTION_POSTS).add(post)
+            postCollection.add(post)
                 .addOnSuccessListener {
-                    Log.d(LOG_TAG, "SUCCESS")
+                    Log.d(LOG_TAG, "Successfully added post")
                     Toast.makeText(getApplication(),
                         "Post succeeded", Toast.LENGTH_SHORT).show()
                 }
@@ -42,49 +49,52 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
 
     fun removePost(postId: String) {
         Thread {
-            FirebaseFirestore.getInstance().collection(COLLECTION_POSTS).document(postId)
+            postCollection.document(postId)
                 .delete()
-                .addOnSuccessListener {}
-                .addOnFailureListener {}
+                .addOnSuccessListener {
+                    Log.d(LOG_TAG, "Successfully remove post: $postId")
+                }
+                .addOnFailureListener {
+                    Log.d(LOG_TAG, "${it.message}")
+                }
         }.start()
     }
 
-    fun addLikeToPost(postId: String, userId: String) {
+    fun likePostByUser(postId: String, userId: String) {
         Thread {
-            FirebaseFirestore.getInstance().collection(COLLECTION_POSTS)
-                .document(postId).get().addOnSuccessListener {
+            postCollection.document(postId)
+                .get()
+                .addOnSuccessListener {
                     val postObject = it.toObject(Post::class.java)!!
 
                     // have not liked
                     if (postObject.likedBy.indexOf(userId) < 0){
-                        FirebaseFirestore.getInstance().collection(COLLECTION_POSTS)
+                        FirebaseFirestore.getInstance().collection(COLLECTION)
                             .document(postId)
                             .update("likedBy", FieldValue.arrayUnion(userId))
+                            .addOnSuccessListener {
+                                Log.d(LOG_TAG, "$userId likes $postId")
+                            }
+                            .addOnFailureListener { err ->
+                                Log.d(LOG_TAG, "${err.message}")
+                            }
                     }
                     // have liked
                     else {
-                        FirebaseFirestore.getInstance().collection(COLLECTION_POSTS)
+                        FirebaseFirestore.getInstance().collection(COLLECTION)
                             .document(postId)
                             .update("likedBy", FieldValue.arrayRemove(userId))
+                            .addOnSuccessListener {
+                                Log.d(LOG_TAG, "$userId unlikes $postId")
+                            }
+                            .addOnFailureListener { err ->
+                                Log.d(LOG_TAG, "${err.message}")
+                            }
                     }
                 }
-                .addOnFailureListener{}
+                .addOnFailureListener{
+                    Log.d(LOG_TAG, "${it.message}")
+                }
         }.start()
     }
-
-    // TODO: Fix update comments. Need to change arrayOf<comment> to arrayOf<String> (commentID) ?
-    fun addComment(postid: String, comment: Comment) {
-        val postDocumentId = FirebaseFirestore.getInstance().collection(COLLECTION_POSTS).whereEqualTo("postid", postid).get()
-        FirebaseFirestore.getInstance().collection(COLLECTION_POSTS).document(
-            postDocumentId.toString() // TODO: Check syntax
-        ).update("comments", FieldValue.arrayUnion(comment))
-            .addOnSuccessListener {
-
-            }
-            .addOnFailureListener {
-
-            }
-    }
-
-
 }
