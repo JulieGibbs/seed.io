@@ -32,6 +32,7 @@ class TimelineAdapter(private val context: TimelineFragment, query: Query?) : Fi
             Log.d("adapter", post!!.body)
             binding.tvContents.text = post.body
             binding.tvLikeCount.text = post.likedBy.size.toString()
+            binding.tvTitle.text = post.title
             binding.tvCommentCount.text = post.numberOfComments.toString()
             binding.ivLike.setOnClickListener {
                 context.likePost(postId)
