@@ -32,7 +32,7 @@ class NewPostFragment : Fragment() {
 
         binding.btnCreatePost.setOnClickListener {
             if (validInput()) {
-                val newPost = Post(title = binding.etTitle.text.toString(), body = binding.etContents.text.toString())
+                val newPost = Post(title = binding.etTitle.text.toString(), body = binding.etContents.text.toString(), tag = 3)
                 viewModel.createPost(newPost)
                 it.findNavController().popBackStack()
             }

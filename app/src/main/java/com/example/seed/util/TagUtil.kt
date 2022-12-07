@@ -7,11 +7,6 @@ class TagUtil {
             1 to "Fintech",
             2 to "Web3",
             3 to "Biotech",
-            4 to "Artificial Intelligence",
-            5 to "Climate Tech",
-            6 to "Education",
-            7 to "Space",
-            8 to "Real Estate"
         )
     }
 
