@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
+import com.example.seed.R
 import com.example.seed.adapter.TimelineAdapter
 import com.example.seed.data.Post
 import com.example.seed.databinding.FragmentTimelineBinding
@@ -38,9 +40,8 @@ class TimelineFragment : Fragment() {
         binding.recyclerPost.adapter = adapter
 
         binding.fabAddPost.setOnClickListener {
-            postViewModel.createPost(
-                Post(body = "Yo template")
-            )
+            // navigate to create post fragment
+            it.findNavController().navigate(R.id.newPostFragment)
         }
 
         return binding.root
