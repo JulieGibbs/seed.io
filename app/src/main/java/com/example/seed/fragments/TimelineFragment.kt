@@ -31,6 +31,7 @@ class TimelineFragment : Fragment() {
 
         Log.d("fragment", "on create view")
         adapter = TimelineAdapter(
+            this,
             FirebaseFirestore.getInstance().collection("posts")
         )
         //adapter = TempAdapter()
@@ -53,5 +54,10 @@ class TimelineFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         adapter.stopListening()
+    }
+
+    fun likePost(postId: String){
+        // TODO: replace "01" with actual userId
+        postViewModel.likePostByUser(postId, "01");
     }
 }
