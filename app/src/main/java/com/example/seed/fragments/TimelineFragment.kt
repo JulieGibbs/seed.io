@@ -34,16 +34,39 @@ class TimelineFragment : Fragment() {
             this,
             FirebaseFirestore.getInstance().collection("posts")
         )
-        //adapter = TempAdapter()
-        binding.recyclerPost.adapter = adapter
 
-        binding.fabAddPost.setOnClickListener {
-            postViewModel.createPost(
-                Post(body = "Yo template")
-            )
-        }
+        binding.recyclerPost.adapter = adapter
+        handleOnClickTag(adapter)
+        handleOnClickAddPost()
 
         return binding.root
+    }
+
+    private fun handleOnClickAddPost() {
+        binding.fabAddPost.setOnClickListener {
+            postViewModel.createPost(
+                Post(body = "Yo template", tag = 3)
+            )
+        }
+    }
+
+    private fun handleOnClickTag(adapter: TimelineAdapter) {
+        binding.btnTag0.setOnClickListener {
+            val queryByTag = FirebaseFirestore.getInstance().collection("posts")
+            adapter.setQuery(queryByTag)
+        }
+        binding.btnTag1.setOnClickListener {
+            val queryByTag = FirebaseFirestore.getInstance().collection("posts").whereEqualTo("tag", 1)
+            adapter.setQuery(queryByTag)
+        }
+        binding.btnTag2.setOnClickListener {
+            val queryByTag = FirebaseFirestore.getInstance().collection("posts").whereEqualTo("tag", 2)
+            adapter.setQuery(queryByTag)
+        }
+        binding.btnTag3.setOnClickListener {
+            val queryByTag = FirebaseFirestore.getInstance().collection("posts").whereEqualTo("tag", 3)
+            adapter.setQuery(queryByTag)
+        }
     }
 
     override fun onStart() {
