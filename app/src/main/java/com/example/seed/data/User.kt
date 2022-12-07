@@ -1,9 +1,10 @@
 package com.example.seed.data
 
+import java.io.Serializable
+
 data class User (
-    var uid: String = "",
     var username: String = "",
-    var googleID: String = "",
+    var uid: String = "",
     var bio: String = "",
     var imgURL: String = "",
-)
+) : Serializable
