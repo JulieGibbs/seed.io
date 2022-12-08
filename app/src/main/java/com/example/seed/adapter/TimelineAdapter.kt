@@ -2,10 +2,12 @@ package com.example.seed.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.seed.data.Post
 import com.example.seed.databinding.PostRowBinding
 import com.example.seed.fragments.TimelineFragment
+import com.example.seed.fragments.TimelineFragmentDirections
 import com.google.firebase.firestore.Query
 
 class TimelineAdapter(private val context: TimelineFragment, query: Query?) : FirestoreAdapter<TimelineAdapter.ViewHolder>(query){
@@ -32,6 +34,10 @@ class TimelineAdapter(private val context: TimelineFragment, query: Query?) : Fi
             binding.tvCommentCount.text = post.numberOfComments.toString()
             binding.ivLike.setOnClickListener {
                 context.likePost(postId)
+            }
+            binding.root.setOnClickListener {
+                val action = TimelineFragmentDirections.actionTimelineFragmentToPostDetailFragment(postId)
+                it.findNavController().navigate(action)
             }
         }
     }
