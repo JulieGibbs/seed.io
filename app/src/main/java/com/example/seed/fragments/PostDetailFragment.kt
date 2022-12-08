@@ -50,6 +50,8 @@ class PostDetailFragment : Fragment() {
             postViewModel.getPostById(it).observe(viewLifecycleOwner) { post ->
                 binding.tvTitle.text = post.title
                 binding.tvContents.text = post.body
+                binding.tvLikeCount.text = post.likedBy.size.toString()+" Drops"
+                binding.tvCommentCount.text = post.numberOfComments.toString()+" Comments"
             }
         }
 
