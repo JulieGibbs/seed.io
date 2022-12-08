@@ -20,6 +20,7 @@ import com.google.android.gms.common.api.ApiException
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.auth.GoogleAuthProvider
+import com.google.firebase.firestore.DocumentSnapshot
 
 class LoginActivity : AppCompatActivity() {
 
@@ -57,24 +58,15 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun handleSuccessfulSignIn(user: FirebaseUser) {
-        UserViewModel.userCollection.document(user.uid).get()
-            .addOnCompleteListener { task ->
-                if (task.isSuccessful){
-                    val document = task.result
-                    if (document.exists()){
-                        Log.d(TAG, "signed in user")
-                        initializeMainActivity()
-                    } else {
-                        Log.d(TAG, "signing up user...")
-                        initializeUser(user.uid)
-                    }
-                } else {
-                    Log.d(TAG, "Error ${task.exception}")
-                }
-            }
+        UserViewModel.getUserInfo(
+            user.uid,
+            ::initializeMainActivity,
+            ::initializeUser
+        )
     }
 
     private fun initializeUser(uid: String) {
+        Log.d(TAG, "User not found, initializing user...")
         val intentDetails = Intent()
         intentDetails.setClass(
             this, InitializeUserActivity::class.java
@@ -85,7 +77,8 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intentDetails)
     }
 
-    private fun initializeMainActivity(){
+    private fun initializeMainActivity(document: DocumentSnapshot){
+        Log.d(TAG, "User found")
         val intentDetails = Intent()
         intentDetails.setClass(
             this, MainActivity::class.java
