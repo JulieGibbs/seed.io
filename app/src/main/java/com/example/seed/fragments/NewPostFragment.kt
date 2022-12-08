@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.seed.R
@@ -21,6 +22,7 @@ class NewPostFragment : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
         }
+
     }
 
     override fun onCreateView(
@@ -30,13 +32,25 @@ class NewPostFragment : Fragment() {
         binding = FragmentNewPostBinding.inflate(inflater, container, false)
         viewModel = ViewModelProvider(this)[PostViewModel::class.java]
 
+        var categoryAdapter = ArrayAdapter.createFromResource(
+            requireActivity(),
+            R.array.category_array,
+            android.R.layout.simple_spinner_item
+        )
+        categoryAdapter.setDropDownViewResource(
+            android.R.layout.simple_spinner_dropdown_item
+        )
+        binding.spinnerCategory.adapter = categoryAdapter
+
         binding.btnCreatePost.setOnClickListener {
             if (validInput()) {
-                val newPost = Post(title = binding.etTitle.text.toString(), body = binding.etContents.text.toString(), tag = 3)
+                val newPost = Post(title = binding.etTitle.text.toString(), body = binding.etContents.text.toString(), tag = binding.spinnerCategory.selectedItemPosition)
                 viewModel.createPost(newPost)
                 it.findNavController().popBackStack()
             }
         }
+
+
         return binding.root
     }
 

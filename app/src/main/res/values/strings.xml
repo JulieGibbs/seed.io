@@ -4,4 +4,11 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="btnSignIn">Sign in with Google</string>
     <string name="btnSignUp">Sign up with Google</string>
+
+    <string-array name="category_array">
+        <item>All</item>
+        <item>Fintech</item>
+        <item>Web3</item>
+        <item>Biotech</item>
+    </string-array>
 </resources>
