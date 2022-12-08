@@ -10,8 +10,10 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import com.example.seed.R
 import com.example.seed.adapter.TimelineAdapter
+import com.example.seed.data.Comment
 import com.example.seed.data.Post
 import com.example.seed.databinding.FragmentTimelineBinding
+import com.example.seed.viewmodel.CommentViewModel
 import com.example.seed.viewmodel.PostViewModel
 import com.google.firebase.firestore.FirebaseFirestore
 

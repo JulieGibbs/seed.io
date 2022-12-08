@@ -245,6 +245,7 @@
             app:layout_constraintStart_toStartOf="parent">
 
             <EditText
+                android:id="@+id/commentText"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
