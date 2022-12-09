@@ -66,6 +66,7 @@ class PostDetailFragment : Fragment() {
         }
 
         setNewCommentListener()
+        setLikePostListener()
 
         return binding.root
     }
@@ -87,6 +88,12 @@ class PostDetailFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun setLikePostListener() {
+        binding.ivLike.setOnClickListener {
+            postId?.let { it1 -> postViewModel.likePostByUser(it1, "") }
         }
     }
 
