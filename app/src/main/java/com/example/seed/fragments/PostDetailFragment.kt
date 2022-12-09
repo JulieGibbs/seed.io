@@ -52,6 +52,8 @@ class PostDetailFragment : Fragment() {
         commentViewModel = ViewModelProvider(this)[CommentViewModel::class.java]
         binding.recyclerComment.adapter = adapter
 
+        firebaseAuth = FirebaseAuth.getInstance()
+
         postId?.let {
             postViewModel.getPostById(it).observe(viewLifecycleOwner) { post ->
                 binding.tvTitle.text = post.title
