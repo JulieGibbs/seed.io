@@ -8,6 +8,7 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.result.IntentSenderRequest
 import androidx.activity.result.contract.ActivityResultContracts.StartIntentSenderForResult
+import com.example.seed.data.User
 import com.example.seed.databinding.ActivityLoginBinding
 import com.example.seed.viewmodel.UserViewModel
 import com.google.android.gms.auth.api.identity.BeginSignInRequest
@@ -77,7 +78,7 @@ class LoginActivity : AppCompatActivity() {
         startActivity(intentDetails)
     }
 
-    private fun initializeMainActivity(document: DocumentSnapshot){
+    private fun initializeMainActivity(user: User){
         Log.d(TAG, "User found")
         val intentDetails = Intent()
         intentDetails.setClass(

@@ -6,11 +6,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.example.seed.adapter.CommentAdapter
 import com.example.seed.data.Comment
+import com.example.seed.data.User
 import com.example.seed.databinding.FragmentPostDetailBinding
 import com.example.seed.viewmodel.CommentViewModel
 import com.example.seed.viewmodel.PostViewModel
+import com.example.seed.viewmodel.UserViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
 class PostDetailFragment : Fragment() {
@@ -20,6 +24,8 @@ class PostDetailFragment : Fragment() {
 
     private lateinit var postViewModel: PostViewModel
     private lateinit var commentViewModel: CommentViewModel
+
+    private lateinit var firebaseAuth: FirebaseAuth
 
     private lateinit var adapter : CommentAdapter
 
@@ -39,7 +45,7 @@ class PostDetailFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         // Inflate the layout for this fragment
         binding = FragmentPostDetailBinding.inflate(inflater, container, false)
         postViewModel = ViewModelProvider(this)[PostViewModel::class.java]
@@ -52,6 +58,10 @@ class PostDetailFragment : Fragment() {
                 binding.tvContents.text = post.body
                 binding.tvLikeCount.text = post.likedBy.size.toString()+" Drops"
                 binding.tvCommentCount.text = post.numberOfComments.toString()+" Comments"
+                UserViewModel.getUserInfo(
+                    userId = post.authorid,
+                    handleUserFound = ::setPostUsernameAndProfile
+                )
             }
         }
 
@@ -60,22 +70,21 @@ class PostDetailFragment : Fragment() {
         return binding.root
     }
 
-    companion object {
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PostDetailFragment().apply {
-                arguments = Bundle().apply {
-                }
-            }
-    }
-
     private fun setNewCommentListener() {
         binding.ivPostComment.setOnClickListener {
             if (binding.commentText.text.isNotEmpty()) {
-                val newComment = postId?.let { id -> Comment(postId = id, text = binding.commentText.text.toString()) }
-                if (newComment != null) {
-                    commentViewModel.addComment(newComment)
-                    binding.commentText.text.clear()
+                if (firebaseAuth.currentUser != null){
+                    val newComment = postId?.let { id ->
+                        Comment(
+                            postId = id,
+                            text = binding.commentText.text.toString(),
+                            authorid = firebaseAuth.currentUser!!.uid
+                        )
+                    }
+                    if (newComment != null) {
+                        commentViewModel.addComment(newComment)
+                        binding.commentText.text.clear()
+                    }
                 }
             }
         }
@@ -89,5 +98,17 @@ class PostDetailFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         adapter.stopListening()
+    }
+
+    private fun setPostUsernameAndProfile(user: User){
+        binding.tvUsername.text = user.username
+        displayPostProfileImage(user.imgURL)
+    }
+
+    private fun displayPostProfileImage(profileImgURL: String) {
+        if (profileImgURL.isEmpty()) return
+        Glide.with(this@PostDetailFragment)
+            .load(profileImgURL)
+            .into(binding.ivProfile)
     }
 }

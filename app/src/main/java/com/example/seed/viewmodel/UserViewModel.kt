@@ -3,15 +3,13 @@ package com.example.seed.viewmodel
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
-import com.example.seed.LoginActivity
 import com.example.seed.data.User
-import com.google.firebase.firestore.DocumentSnapshot
 import com.google.firebase.firestore.FirebaseFirestore
 
 class UserViewModel(application: Application) : AndroidViewModel(application) {
 
     companion object {
-        private const val COLLECTION = "users"
+        const val COLLECTION = "users"
         private const val LOG_TAG = "USER_VIEW_MODEL"
 
         private val userCollection = FirebaseFirestore.getInstance().collection(COLLECTION)
@@ -38,15 +36,16 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         // pass in 2 functions one that tell what to do if you do find
         // an user with the given userId and one when you do not find one
         // look at LoginActivity.handleSuccessfulSignIn for reference
-        fun getUserInfo(userId: String,
-                    handleUserFound: (DocumentSnapshot) -> Unit = {},
-                    handleUserNotFound: (String) -> Unit = {}){
+        fun getUserInfo(
+            userId: String,
+            handleUserFound: (User) -> Unit = {},
+            handleUserNotFound: (String) -> Unit = {}){
             userCollection.document(userId).get()
                 .addOnCompleteListener { task ->
                     if (task.isSuccessful){
                         val document = task.result
                         if (document.exists()){
-                            handleUserFound(document)
+                            handleUserFound(document.toObject(User::class.java)!!)
                         } else {
                             handleUserNotFound(userId)
                         }

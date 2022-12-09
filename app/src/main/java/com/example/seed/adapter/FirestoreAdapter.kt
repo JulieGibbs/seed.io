@@ -59,6 +59,7 @@ abstract class FirestoreAdapter<VH : RecyclerView.ViewHolder>(private var query:
         // Listen to new query
         this.query = query
         startListening()
+        Log.d("Snapshot Query", snapshots.toString())
     }
 
     open fun onError(e: FirebaseFirestoreException) {
