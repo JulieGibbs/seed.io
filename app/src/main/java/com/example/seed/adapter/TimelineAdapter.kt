@@ -10,6 +10,7 @@ import com.example.seed.data.User
 import com.example.seed.databinding.PostRowBinding
 import com.example.seed.fragments.TimelineFragment
 import com.example.seed.fragments.TimelineFragmentDirections
+import com.example.seed.util.TagUtil
 import com.example.seed.viewmodel.UserViewModel
 import com.google.firebase.firestore.Query
 
@@ -37,6 +38,7 @@ class TimelineAdapter(private val context: TimelineFragment, query: Query?) : Fi
             binding.tvContents.text = post.body
             binding.tvLikeCount.text = post.likedBy.size.toString()
             binding.tvTitle.text = post.title
+            binding.tvLabel.text = TagUtil().intToTag(post.tag)
             binding.tvCommentCount.text = post.numberOfComments.toString()
             binding.ivLike.setOnClickListener {
                 context.likePost(postId)
@@ -68,5 +70,6 @@ class TimelineAdapter(private val context: TimelineFragment, query: Query?) : Fi
                 .load(profileImgURL)
                 .into(binding.ivProfile)
         }
+
     }
 }
