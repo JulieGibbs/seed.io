@@ -11,7 +11,7 @@ import com.example.seed.data.User
 import com.example.seed.databinding.PostRowBinding
 import com.example.seed.fragments.ProfileFragment
 import com.example.seed.fragments.ProfileFragmentDirections
-import com.example.seed.fragments.TimelineFragmentDirections
+import com.example.seed.util.TagUtil
 import com.example.seed.viewmodel.UserViewModel
 import com.google.firebase.firestore.Query
 
@@ -41,6 +41,7 @@ class UserPostAdapter(private val context: ProfileFragment, query: Query?) : Fir
 
             binding.tvTitle.text = post.title
             binding.tvContents.text = post.body
+            binding.tvLabel.text = TagUtil().intToTag(post.tag)
             binding.tvLikeCount.text = post.likedBy.size.toString()
             binding.tvCommentCount.text = post.numberOfComments.toString()
             binding.ivLike.setOnClickListener {
