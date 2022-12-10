@@ -1,11 +1,13 @@
 package com.example.seed.data
 
-import java.sql.Timestamp
+import com.google.firebase.firestore.ServerTimestamp
+import java.util.*
 
 data class Comment(
     var authorid: String = "",
     var postId: String = "",
     var text: String = "",
-    var timestamp: Timestamp? = null, // TODO: Automatically instantiate when object is created
+    @ServerTimestamp
+    var timestamp: Date? = null
 )
 

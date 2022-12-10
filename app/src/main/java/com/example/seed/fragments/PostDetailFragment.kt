@@ -1,6 +1,7 @@
 package com.example.seed.fragments
 
 import android.os.Bundle
+import android.text.format.DateUtils
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,9 @@ import com.example.seed.viewmodel.CommentViewModel
 import com.example.seed.viewmodel.PostViewModel
 import com.example.seed.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class PostDetailFragment : Fragment() {
 
@@ -39,6 +42,7 @@ class PostDetailFragment : Fragment() {
             this,
             FirebaseFirestore.getInstance().collection(CommentViewModel.COLLECTION)
                 .whereEqualTo("postId", postId)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
         )
     }
 
@@ -60,6 +64,12 @@ class PostDetailFragment : Fragment() {
                 binding.tvContents.text = post.body
                 binding.tvLikeCount.text = post.likedBy.size.toString()+" Drops"
                 binding.tvCommentCount.text = post.numberOfComments.toString()+" Comments"
+
+                val longDate = post.timestamp?.time
+                val ago = longDate?.let { DateUtils.getRelativeTimeSpanString(it, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) }
+                binding.tvTime.text = ago.toString()
+                binding.tvDate.text = post.timestamp?.toString()
+
                 UserViewModel.getUserInfo(
                     userId = post.authorid,
                     handleUserFound = ::setPostUsernameAndProfile
@@ -80,7 +90,7 @@ class PostDetailFragment : Fragment() {
                         Comment(
                             postId = id,
                             text = binding.commentText.text.toString(),
-                            authorid = firebaseAuth.currentUser!!.uid
+                            authorid = firebaseAuth.currentUser!!.uid,
                         )
                     }
                     if (newComment != null) {
