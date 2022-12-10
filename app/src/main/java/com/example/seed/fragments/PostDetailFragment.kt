@@ -1,6 +1,7 @@
 package com.example.seed.fragments
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -55,7 +56,7 @@ class PostDetailFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         postId?.let {
-            postViewModel.getPostById(it).observe(viewLifecycleOwner) { post ->
+            postViewModel.listenForPostUpdates(it).observe(viewLifecycleOwner) { post ->
                 binding.tvTitle.text = post.title
                 binding.tvContents.text = post.body
                 binding.tvLikeCount.text = post.likedBy.size.toString()+" Drops"
@@ -95,7 +96,7 @@ class PostDetailFragment : Fragment() {
 
     private fun setLikePostListener() {
         binding.ivLike.setOnClickListener {
-            postId?.let { it1 -> postViewModel.likePostByUser(it1, "") }
+            postId?.let { it1 -> postViewModel.likePostByUser(it1, firebaseAuth.currentUser!!.uid) }
         }
     }
 
