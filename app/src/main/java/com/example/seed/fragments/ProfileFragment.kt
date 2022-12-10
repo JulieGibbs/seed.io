@@ -16,6 +16,7 @@ import com.example.seed.viewmodel.PostViewModel
 import com.example.seed.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class ProfileFragment : Fragment() {
     companion object {
@@ -49,11 +50,11 @@ class ProfileFragment : Fragment() {
             userId = firebaseAuth.currentUser!!.uid
         }
 
-        // TODO: This still does not work
         adapter = UserPostAdapter(
             this,
             FirebaseFirestore.getInstance().collection(PostViewModel.COLLECTION)
                 .whereEqualTo("authorid", userId)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
         )
         binding.recyclerPost.adapter = adapter
 
