@@ -10,48 +10,18 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/tagAndOption"
-            android:layout_width="match_parent"
+
+        <TextView
+            android:id="@+id/tvLabel"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:orientation="horizontal"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="24dp"
+            android:text="Tag"
+            android:textSize="12sp"
+            android:textColor="#3D8361"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Web3"
-                android:textSize="10sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:text="Fintech"
-                android:textSize="10sp"
-                app:layout_constraintStart_toEndOf="@+id/textView"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/ivOption"
-                android:layout_width="16dp"
-                android:layout_height="16dp"
-                android:layout_marginBottom="3dp"
-                android:scaleType="fitCenter"
-                android:src="@mipmap/ic_launcher"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/tvTitle"
@@ -61,9 +31,19 @@
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-black"
             android:text="Title"
-            android:textSize="16sp"
+            android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tagAndOption" />
+            app:layout_constraintTop_toBottomOf="@+id/tvLabel" />
+
+        <ImageView
+            android:id="@+id/ivOption"
+            android:layout_width="16dp"
+            android:layout_height="16dp"
+            android:layout_marginEnd="8dp"
+            android:scaleType="fitCenter"
+            android:src="@drawable/more"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/tvTitle" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/userInfos"
@@ -79,7 +59,7 @@
                 android:layout_width="16dp"
                 android:layout_height="16dp"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/user"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -94,29 +74,6 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/ivProfile"
                 app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvTime"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:text="8m ago"
-                android:textColor="@android:color/darker_gray"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvUsername"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/tvLabel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="12dp"
-                android:text="Web 3"
-                android:textSize="12sp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvTime"
-                app:layout_constraintTop_toTopOf="parent" /> <!-- maybe recycler view -->
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <TextView
@@ -124,9 +81,9 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="8dp"
-            android:text="Hey everyone, I came up with this cool casino idea called ‘Hash Vegas’, a social casino that uses blockchain hash values that cannot be ..."
+            android:text="Contents"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/userInfos" />
@@ -147,7 +104,7 @@
                 android:id="@+id/tvLikeCount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="3 Drops"
+                android:text="0 Drops"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -159,7 +116,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="25 Comments"
+                android:text="0 Comments"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -170,7 +127,7 @@
                 android:id="@+id/tvDate"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="4:52 PM 11/21/22"
+                android:text="0:00 PM 00/00/00"
                 android:textColor="@android:color/darker_gray"
                 android:textSize="12sp"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -197,7 +154,7 @@
                 android:layout_height="24dp"
                 android:layout_marginStart="32dp"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/drop"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -207,7 +164,7 @@
                 android:layout_width="24dp"
                 android:layout_height="24dp"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/comment"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/ivShare"
                 app:layout_constraintStart_toEndOf="@+id/ivLike"
@@ -219,7 +176,7 @@
                 android:layout_height="24dp"
                 android:layout_marginEnd="32dp"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/ic_launcher"
+                android:src="@drawable/share"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -240,6 +197,7 @@
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:orientation="vertical"
+            android:background="@color/white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent">
@@ -263,7 +221,7 @@
                 android:layout_height="24dp"
                 android:layout_marginEnd="8dp"
                 android:scaleType="fitCenter"
-                android:src="@mipmap/ic_launcher"
+                android:src="@mipmap/send"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />

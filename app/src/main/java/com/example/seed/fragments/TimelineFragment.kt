@@ -1,10 +1,12 @@
 package com.example.seed.fragments
 
+import android.graphics.Color
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -56,18 +58,55 @@ class TimelineFragment : Fragment() {
 
     private fun handleOnClickTag(adapter: TimelineAdapter) {
         binding.btnTag0.setOnClickListener {
+            binding.btnTag0.setBackgroundColor(Color.parseColor("#EEF2E6"))
+            binding.btnTag0.setTextColor(Color.parseColor("#1C6758"))
+            binding.btnTag1.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag1.setTextColor(Color.parseColor("#000000"))
+            binding.btnTag2.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag2.setTextColor(Color.parseColor("#000000"))
+            binding.btnTag3.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag3.setTextColor(Color.parseColor("#000000"))
+
             val queryByTag = FirebaseFirestore.getInstance().collection("posts")
             adapter.setQuery(queryByTag)
         }
         binding.btnTag1.setOnClickListener {
+            binding.btnTag1.setBackgroundColor(Color.parseColor("#EEF2E6"))
+            binding.btnTag1.setTextColor(Color.parseColor("#1C6758"))
+            binding.btnTag0.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag0.setTextColor(Color.parseColor("#000000"))
+            binding.btnTag2.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag2.setTextColor(Color.parseColor("#000000"))
+            binding.btnTag3.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag3.setTextColor(Color.parseColor("#000000"))
+
             val queryByTag = FirebaseFirestore.getInstance().collection("posts").whereEqualTo("tag", 1)
             adapter.setQuery(queryByTag)
         }
         binding.btnTag2.setOnClickListener {
+            binding.btnTag2.setBackgroundColor(Color.parseColor("#EEF2E6"))
+            binding.btnTag2.setTextColor(Color.parseColor("#1C6758"))
+            binding.btnTag0.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag0.setTextColor(Color.parseColor("#000000"))
+            binding.btnTag1.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag1.setTextColor(Color.parseColor("#000000"))
+            binding.btnTag3.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag3.setTextColor(Color.parseColor("#000000"))
+
+
             val queryByTag = FirebaseFirestore.getInstance().collection("posts").whereEqualTo("tag", 2)
             adapter.setQuery(queryByTag)
         }
         binding.btnTag3.setOnClickListener {
+            binding.btnTag3.setBackgroundColor(Color.parseColor("#EEF2E6"))
+            binding.btnTag3.setTextColor(Color.parseColor("#1C6758"))
+            binding.btnTag0.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag0.setTextColor(Color.parseColor("#000000"))
+            binding.btnTag1.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag1.setTextColor(Color.parseColor("#000000"))
+            binding.btnTag2.setBackgroundColor(Color.parseColor("#FFFFFF"))
+            binding.btnTag2.setTextColor(Color.parseColor("#000000"))
+
             val queryByTag = FirebaseFirestore.getInstance().collection("posts").whereEqualTo("tag", 3)
             adapter.setQuery(queryByTag)
         }

@@ -10,7 +10,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!--replace with horizontal recyler view OR multiple btns-->
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/tagView"
             android:layout_width="match_parent"
@@ -26,8 +25,12 @@
                 android:id="@+id/btnTag0"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+
+                android:backgroundTint="#EEF2E6"
                 android:text="All"
+                android:textColor="#1C6758"
                 android:textSize="10sp"
+                android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -37,7 +40,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:backgroundTint="@color/white"
                 android:text="Fintech"
+                android:textColor="@color/black"
                 android:textSize="10sp"
                 app:layout_constraintStart_toEndOf="@+id/btnTag0"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -47,7 +52,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:backgroundTint="@color/white"
                 android:text="Web3"
+                android:textColor="@color/black"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnTag1"
@@ -59,7 +66,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:backgroundTint="@color/white"
                 android:text="Biotech"
+                android:textColor="@color/black"
                 android:textSize="10sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnTag2"
@@ -72,7 +81,7 @@
             android:id="@+id/recyclerPost"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="8dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
             app:layout_constraintTop_toBottomOf="@+id/tagView" />
@@ -83,12 +92,11 @@
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:tint="@android:color/white"
             app:backgroundTint="#3D8361"
             app:layout_anchorGravity="bottom|end"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@android:drawable/ic_input_add" />
+            app:srcCompat="@mipmap/add"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

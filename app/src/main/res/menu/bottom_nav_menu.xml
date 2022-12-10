@@ -2,12 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/timelineFragment"
+        android:icon="@drawable/home"
         android:title="Timeline"
-        android:icon="@drawable/ic_launcher_foreground"
         />
 
     <item
         android:id="@+id/profileFragment"
-        android:icon="@drawable/ic_launcher_foreground"
+        android:icon="@drawable/user"
         android:title="Profile" />
 </menu>

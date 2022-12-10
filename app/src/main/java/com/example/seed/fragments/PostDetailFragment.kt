@@ -1,24 +1,27 @@
 package com.example.seed.fragments
 
+import android.annotation.SuppressLint
+import android.icu.text.SimpleDateFormat
 import android.os.Bundle
-import android.text.format.DateUtils
-import androidx.fragment.app.Fragment
+import android.text.format.DateFormat
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
 import com.example.seed.adapter.CommentAdapter
 import com.example.seed.data.Comment
 import com.example.seed.data.User
 import com.example.seed.databinding.FragmentPostDetailBinding
+import com.example.seed.util.TagUtil
 import com.example.seed.viewmodel.CommentViewModel
 import com.example.seed.viewmodel.PostViewModel
 import com.example.seed.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import java.util.*
 
 class PostDetailFragment : Fragment() {
 
@@ -46,6 +49,7 @@ class PostDetailFragment : Fragment() {
         )
     }
 
+    @SuppressLint("SimpleDateFormat")
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -64,11 +68,11 @@ class PostDetailFragment : Fragment() {
                 binding.tvContents.text = post.body
                 binding.tvLikeCount.text = post.likedBy.size.toString()+" Drops"
                 binding.tvCommentCount.text = post.numberOfComments.toString()+" Comments"
+                binding.tvLabel.text = TagUtil().intToTag(post.tag)
 
-                val longDate = post.timestamp?.time
-                val ago = longDate?.let { DateUtils.getRelativeTimeSpanString(it, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) }
-                binding.tvTime.text = ago.toString()
-                binding.tvDate.text = post.timestamp?.toString()
+                val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
+                val strDate: String = dateFormat.format(post.timestamp)
+                binding.tvDate.text = strDate
 
                 UserViewModel.getUserInfo(
                     userId = post.authorid,
