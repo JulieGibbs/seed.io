@@ -27,7 +27,7 @@ class CommentViewModel(application: Application) : AndroidViewModel(application)
                 .addOnFailureListener {
                     Log.d(LOG_TAG, "${it.message}")
                     Toast.makeText(getApplication(),
-                        "Post failed", Toast.LENGTH_SHORT).show()
+                        "Could not add comment", Toast.LENGTH_SHORT).show()
                 }
 
             // increment like

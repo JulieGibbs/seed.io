@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.seed.adapter.UserPostAdapter
 import com.example.seed.data.User
@@ -15,6 +16,7 @@ import com.example.seed.viewmodel.PostViewModel
 import com.example.seed.viewmodel.UserViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class ProfileFragment : Fragment() {
     companion object {
@@ -48,13 +50,18 @@ class ProfileFragment : Fragment() {
             userId = firebaseAuth.currentUser!!.uid
         }
 
-        // TODO: This still does not work
         adapter = UserPostAdapter(
             this,
             FirebaseFirestore.getInstance().collection(PostViewModel.COLLECTION)
                 .whereEqualTo("authorid", userId)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
         )
         binding.recyclerPost.adapter = adapter
+
+        binding.btnSetting.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToSettingsFragment()
+            it.findNavController().navigate(action)
+        }
 
         UserViewModel.getUserInfo(userId, ::displayUserInfo, ::displayUserNotFound)
         return binding.root

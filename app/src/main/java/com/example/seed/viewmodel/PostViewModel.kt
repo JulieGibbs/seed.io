@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.seed.data.Post
 import com.google.firebase.firestore.*
@@ -106,12 +107,12 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         }.start()
     }
 
-    fun getPostById(postId: String): MutableLiveData<Post> {
+    fun listenForPostUpdates(postId: String): MutableLiveData<Post> {
         val mutableLiveData = MutableLiveData<Post>()
-        postCollection.document(postId).get().addOnSuccessListener {
-            mutableLiveData.value = it.toObject(Post::class.java)
-        }.addOnFailureListener {
-            Log.d(LOG_TAG, "${it.message}")
+        postCollection.document(postId).addSnapshotListener { value, error ->
+            if (value != null) {
+                mutableLiveData.value = value.toObject(Post::class.java)
+            }
         }
         return mutableLiveData
     }

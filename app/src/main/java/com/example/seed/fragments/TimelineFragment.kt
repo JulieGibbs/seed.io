@@ -36,10 +36,10 @@ class TimelineFragment : Fragment() {
 
         postViewModel = ViewModelProvider(this)[PostViewModel::class.java]
 
-        Log.d("fragment", "on create view")
         adapter = TimelineAdapter(
             this,
-            FirebaseFirestore.getInstance().collection("posts").orderBy("timestamp", Query.Direction.DESCENDING)
+            FirebaseFirestore.getInstance().collection(PostViewModel.COLLECTION)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
         )
 
         binding.recyclerPost.adapter = adapter
@@ -67,7 +67,8 @@ class TimelineFragment : Fragment() {
             binding.btnTag3.setBackgroundColor(Color.parseColor("#FFFFFF"))
             binding.btnTag3.setTextColor(Color.parseColor("#000000"))
 
-            val queryByTag = FirebaseFirestore.getInstance().collection("posts")
+            val queryByTag = FirebaseFirestore.getInstance().collection(PostViewModel.COLLECTION)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
             adapter.setQuery(queryByTag)
         }
         binding.btnTag1.setOnClickListener {
@@ -80,7 +81,9 @@ class TimelineFragment : Fragment() {
             binding.btnTag3.setBackgroundColor(Color.parseColor("#FFFFFF"))
             binding.btnTag3.setTextColor(Color.parseColor("#000000"))
 
-            val queryByTag = FirebaseFirestore.getInstance().collection("posts").whereEqualTo("tag", 1)
+            val queryByTag = FirebaseFirestore.getInstance().collection(PostViewModel.COLLECTION)
+                .whereEqualTo("tag", 1)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
             adapter.setQuery(queryByTag)
         }
         binding.btnTag2.setOnClickListener {
@@ -93,8 +96,9 @@ class TimelineFragment : Fragment() {
             binding.btnTag3.setBackgroundColor(Color.parseColor("#FFFFFF"))
             binding.btnTag3.setTextColor(Color.parseColor("#000000"))
 
-
-            val queryByTag = FirebaseFirestore.getInstance().collection("posts").whereEqualTo("tag", 2)
+            val queryByTag = FirebaseFirestore.getInstance().collection(PostViewModel.COLLECTION)
+                .whereEqualTo("tag", 2)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
             adapter.setQuery(queryByTag)
         }
         binding.btnTag3.setOnClickListener {
@@ -107,7 +111,9 @@ class TimelineFragment : Fragment() {
             binding.btnTag2.setBackgroundColor(Color.parseColor("#FFFFFF"))
             binding.btnTag2.setTextColor(Color.parseColor("#000000"))
 
-            val queryByTag = FirebaseFirestore.getInstance().collection("posts").whereEqualTo("tag", 3)
+            val queryByTag = FirebaseFirestore.getInstance().collection(PostViewModel.COLLECTION)
+                .whereEqualTo("tag", 3)
+                .orderBy("timestamp", Query.Direction.DESCENDING)
             adapter.setQuery(queryByTag)
         }
     }
