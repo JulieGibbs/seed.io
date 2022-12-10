@@ -59,7 +59,7 @@ class PostDetailFragment : Fragment() {
         firebaseAuth = FirebaseAuth.getInstance()
 
         postId?.let {
-            postViewModel.getPostById(it).observe(viewLifecycleOwner) { post ->
+            postViewModel.listenForPostUpdates(it).observe(viewLifecycleOwner) { post ->
                 binding.tvTitle.text = post.title
                 binding.tvContents.text = post.body
                 binding.tvLikeCount.text = post.likedBy.size.toString()+" Drops"
@@ -78,6 +78,7 @@ class PostDetailFragment : Fragment() {
         }
 
         setNewCommentListener()
+        setLikePostListener()
 
         return binding.root
     }
@@ -99,6 +100,12 @@ class PostDetailFragment : Fragment() {
                     }
                 }
             }
+        }
+    }
+
+    private fun setLikePostListener() {
+        binding.ivLike.setOnClickListener {
+            postId?.let { it1 -> postViewModel.likePostByUser(it1, firebaseAuth.currentUser!!.uid) }
         }
     }
 
