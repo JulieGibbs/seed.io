@@ -3,12 +3,14 @@ package com.example.seed.adapter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.seed.data.Post
 import com.example.seed.data.User
 import com.example.seed.databinding.PostRowBinding
 import com.example.seed.fragments.ProfileFragment
+import com.example.seed.fragments.ProfileFragmentDirections
 import com.example.seed.util.TagUtil
 import com.example.seed.viewmodel.UserViewModel
 import com.google.firebase.firestore.Query
@@ -44,6 +46,11 @@ class UserPostAdapter(private val context: ProfileFragment, query: Query?) : Fir
             binding.tvCommentCount.text = post.numberOfComments.toString()
             binding.ivLike.setOnClickListener {
                 context.likePost(postId)
+            }
+
+            binding.root.setOnClickListener {
+                val action = ProfileFragmentDirections.actionProfileFragmentToPostDetailFragment(postId)
+                it.findNavController().navigate(action)
             }
 
             if (currentUser.uid.isEmpty()){
