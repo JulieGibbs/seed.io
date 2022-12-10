@@ -1,5 +1,6 @@
 package com.example.seed.adapter
 
+import android.text.format.DateUtils
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
@@ -13,6 +14,8 @@ import com.example.seed.fragments.TimelineFragmentDirections
 import com.example.seed.util.TagUtil
 import com.example.seed.viewmodel.UserViewModel
 import com.google.firebase.firestore.Query
+import java.text.SimpleDateFormat
+
 
 class TimelineAdapter(private val context: TimelineFragment, query: Query?) : FirestoreAdapter<TimelineAdapter.ViewHolder>(query){
 
@@ -40,6 +43,9 @@ class TimelineAdapter(private val context: TimelineFragment, query: Query?) : Fi
             binding.tvTitle.text = post.title
             binding.tvLabel.text = TagUtil().intToTag(post.tag)
             binding.tvCommentCount.text = post.numberOfComments.toString()
+            val longDate = post.timestamp?.time
+            val ago = longDate?.let { DateUtils.getRelativeTimeSpanString(it, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) }
+            binding.tvTime.text = ago.toString()
             binding.ivLike.setOnClickListener {
                 context.likePost(postId)
             }

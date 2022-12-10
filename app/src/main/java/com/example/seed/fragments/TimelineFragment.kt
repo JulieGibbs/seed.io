@@ -16,6 +16,7 @@ import com.example.seed.databinding.FragmentTimelineBinding
 import com.example.seed.viewmodel.CommentViewModel
 import com.example.seed.viewmodel.PostViewModel
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 class TimelineFragment : Fragment() {
 
@@ -36,7 +37,7 @@ class TimelineFragment : Fragment() {
         Log.d("fragment", "on create view")
         adapter = TimelineAdapter(
             this,
-            FirebaseFirestore.getInstance().collection("posts")
+            FirebaseFirestore.getInstance().collection("posts").orderBy("timestamp", Query.Direction.DESCENDING)
         )
 
         binding.recyclerPost.adapter = adapter

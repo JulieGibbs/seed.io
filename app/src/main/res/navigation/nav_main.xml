@@ -47,8 +47,8 @@
         android:name="com.example.seed.fragments.SettingsFragment"
         android:label="fragment_settings">
         <action
-            android:id="@+id/action_settingsFragment_to_profileFragment"
-            app:destination="@id/profileFragment" />
+            android:id="@+id/action_settingsFragment_to_editProfileFragment"
+            app:destination="@id/editProfileFragment" />
     </fragment>
 
     <fragment
@@ -61,6 +61,18 @@
         <action
             android:id="@+id/action_profileFragment_to_timelineFragment"
             app:destination="@id/timelineFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_postDetailFragment"
+            app:destination="@id/postDetailFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editProfileFragment"
+        android:name="com.example.seed.fragments.EditProfileFragment"
+        android:label="fragment_edit_profile">
+        <argument
+            android:name="userId"
+            app:argType="string" />
     </fragment>
 
 

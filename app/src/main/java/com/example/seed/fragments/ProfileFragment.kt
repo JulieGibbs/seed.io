@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.example.seed.adapter.UserPostAdapter
 import com.example.seed.data.User
@@ -55,6 +56,11 @@ class ProfileFragment : Fragment() {
                 .whereEqualTo("authorid", userId)
         )
         binding.recyclerPost.adapter = adapter
+
+        binding.btnSetting.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToSettingsFragment()
+            it.findNavController().navigate(action)
+        }
 
         UserViewModel.getUserInfo(userId, ::displayUserInfo, ::displayUserNotFound)
         return binding.root

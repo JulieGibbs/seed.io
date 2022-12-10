@@ -1,5 +1,6 @@
 package com.example.seed.adapter
 
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -36,6 +37,10 @@ class CommentAdapter(private val context: PostDetailFragment, query: Query?) : F
 
             if (comment != null) {
                 binding.tvContents.text = comment.text
+
+                val longDate = comment.timestamp?.time
+                val ago = longDate?.let { DateUtils.getRelativeTimeSpanString(it, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) }
+                binding.tvTime.text = ago.toString()
 
                 if (userIdToUser.containsKey(comment.authorid)){
                     setCommentUsernameAndProfile(userIdToUser[comment.authorid]!!)
