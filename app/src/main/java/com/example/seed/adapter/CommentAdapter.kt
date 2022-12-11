@@ -1,7 +1,6 @@
 package com.example.seed.adapter
 
 import android.text.format.DateUtils
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -19,14 +18,12 @@ class CommentAdapter(private val context: PostDetailFragment, query: Query?) : F
     val userIdToUser = mutableMapOf<String, User>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        Log.d("comment adapter", "on create view holder")
         val binding = CommentRowBinding
             .inflate(LayoutInflater.from(parent.context), parent, false)
         return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Log.d("adapter", "on bind view holder")
         holder.bind(position)
     }
 
@@ -41,7 +38,9 @@ class CommentAdapter(private val context: PostDetailFragment, query: Query?) : F
                 val longDate = comment.timestamp?.time
                 val ago = longDate?.let { DateUtils.getRelativeTimeSpanString(it, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) }
                 binding.tvTime.text = ago.toString()
-
+                if (ago == null) {
+                    binding.tvTime.text = longDate.let { DateUtils.getRelativeTimeSpanString(System.currentTimeMillis(), System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) }
+                }
                 if (userIdToUser.containsKey(comment.authorid)){
                     setCommentUsernameAndProfile(userIdToUser[comment.authorid]!!)
                 } else {
