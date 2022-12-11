@@ -65,6 +65,28 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvBio" />
 
+        <TextView
+            android:id="@+id/tvImageUrl"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-black"
+            android:text="Image URL"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/etBio" />
+
+        <EditText
+            android:id="@+id/etImageUrl"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tvImageUrl" />
+
         <Button
             android:id="@+id/btnEditProfile"
             android:layout_width="160dp"
@@ -75,7 +97,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etBio" />
+            app:layout_constraintTop_toBottomOf="@+id/etImageUrl" />
+
+        <Button
+            android:id="@+id/btnCancel"
+            android:layout_width="160dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="8dp"
+            android:text="Cancel"
+            android:backgroundTint="@color/green_100"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btnEditProfile" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

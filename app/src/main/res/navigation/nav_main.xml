@@ -73,9 +73,9 @@
         android:id="@+id/editProfileFragment"
         android:name="com.example.seed.fragments.EditProfileFragment"
         android:label="fragment_edit_profile">
-        <argument
-            android:name="userId"
-            app:argType="string" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
 
 
