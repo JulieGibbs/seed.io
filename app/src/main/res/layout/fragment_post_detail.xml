@@ -190,7 +190,8 @@
             android:layout_marginTop="24dp"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
-            app:layout_constraintTop_toBottomOf="@+id/postActionOptions" />
+            app:layout_constraintTop_toBottomOf="@+id/postActionOptions"
+            app:layout_constraintBottom_toTopOf="@id/commentBox"/>
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/commentBox"
