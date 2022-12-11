@@ -17,6 +17,7 @@ import com.example.seed.data.Post
 import com.example.seed.databinding.FragmentTimelineBinding
 import com.example.seed.viewmodel.CommentViewModel
 import com.example.seed.viewmodel.PostViewModel
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
@@ -25,6 +26,8 @@ class TimelineFragment : Fragment() {
     private lateinit var binding: FragmentTimelineBinding
     private lateinit var adapter: TimelineAdapter
     private lateinit var postViewModel: PostViewModel
+    private var userId : String = ProfileFragment.NOT_LOGGED_IN_USER_ID
+    private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,12 +44,19 @@ class TimelineFragment : Fragment() {
             FirebaseFirestore.getInstance().collection(PostViewModel.COLLECTION)
                 .orderBy("timestamp", Query.Direction.DESCENDING)
         )
-
+        initializeUserId()
         binding.recyclerPost.adapter = adapter
         handleOnClickTag(adapter)
         handleOnClickAddPost()
 
         return binding.root
+    }
+
+    private fun initializeUserId() {
+        firebaseAuth = FirebaseAuth.getInstance()
+        if (firebaseAuth.currentUser != null) {
+            userId = firebaseAuth.currentUser!!.uid
+        }
     }
 
     private fun handleOnClickAddPost() {
@@ -129,7 +139,6 @@ class TimelineFragment : Fragment() {
     }
 
     fun likePost(postId: String){
-        // TODO: replace "01" with actual userId
-        postViewModel.likePostByUser(postId, "01");
+        postViewModel.likePostByUser(postId, userId = userId);
     }
 }

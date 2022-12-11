@@ -47,7 +47,7 @@ class UserPostAdapter(private val context: ProfileFragment, query: Query?) : Fir
             binding.tvLabel.text = TagUtil().intToTag(post.tag)
             binding.tvLikeCount.text = post.likedBy.size.toString()
             binding.tvCommentCount.text = post.numberOfComments.toString()
-            binding.tvTime.text = ago.toString()
+            binding.tvTime.text = ago?.toString()
             binding.ivLike.setOnClickListener {
                 context.likePost(postId)
             }

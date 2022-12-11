@@ -9,7 +9,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
+import com.example.seed.R
 import com.example.seed.adapter.CommentAdapter
 import com.example.seed.data.Comment
 import com.example.seed.data.User
@@ -102,9 +104,19 @@ class PostDetailFragment : Fragment() {
                         commentViewModel.addComment(newComment)
                         binding.commentText.text.clear()
                     }
+                    if (postId != null) {
+                        reloadFragment(it)
+                    }
                 }
             }
         }
+    }
+
+    private fun reloadFragment(it: View) {
+        val action = PostDetailFragmentDirections.actionPostDetailFragmentToPostDetailFragment(
+            postId!!
+        )
+        it.findNavController().navigate(action)
     }
 
     private fun setLikePostListener() {
