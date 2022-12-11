@@ -56,7 +56,16 @@ class NewPostFragment : Fragment() {
             }
         }
 
+        handleOnClickExit()
+
         return binding.root
+    }
+
+    private fun handleOnClickExit() {
+        binding.ivExit.setOnClickListener {
+            // navigate to timeline fragment
+            it.findNavController().navigate(R.id.timelineFragment)
+        }
     }
 
     private fun validInput() : Boolean {

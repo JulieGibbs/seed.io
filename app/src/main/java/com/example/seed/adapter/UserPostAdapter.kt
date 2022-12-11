@@ -1,5 +1,6 @@
 package com.example.seed.adapter
 
+import android.text.format.DateUtils
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -38,12 +39,15 @@ class UserPostAdapter(private val context: ProfileFragment, query: Query?) : Fir
             val snapshot = getSnapshot(position)
             val postId = getSnapshotId(position)
             val post = snapshot.toObject(Post::class.java)!!
+            val longDate = post.timestamp?.time
+            val ago = longDate?.let { DateUtils.getRelativeTimeSpanString(it, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) }
 
             binding.tvTitle.text = post.title
             binding.tvContents.text = post.body
             binding.tvLabel.text = TagUtil().intToTag(post.tag)
             binding.tvLikeCount.text = post.likedBy.size.toString()
             binding.tvCommentCount.text = post.numberOfComments.toString()
+            binding.tvTime.text = ago?.toString()
             binding.ivLike.setOnClickListener {
                 context.likePost(postId)
             }

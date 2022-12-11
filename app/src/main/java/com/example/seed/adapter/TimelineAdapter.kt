@@ -45,7 +45,7 @@ class TimelineAdapter(private val context: TimelineFragment, query: Query?) : Fi
             binding.tvCommentCount.text = post.numberOfComments.toString()
             val longDate = post.timestamp?.time
             val ago = longDate?.let { DateUtils.getRelativeTimeSpanString(it, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) }
-            binding.tvTime.text = ago.toString()
+            binding.tvTime.text = ago?.toString()
             binding.ivLike.setOnClickListener {
                 context.likePost(postId)
             }
