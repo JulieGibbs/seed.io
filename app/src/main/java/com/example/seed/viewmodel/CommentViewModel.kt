@@ -21,8 +21,6 @@ class CommentViewModel(application: Application) : AndroidViewModel(application)
             commentCollection.add(comment)
                 .addOnSuccessListener {
                     Log.d(LOG_TAG, "Successfully added comment")
-                    Toast.makeText(getApplication(),
-                        "Successfully added comment", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
                     Log.d(LOG_TAG, "${it.message}")

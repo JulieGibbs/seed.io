@@ -110,20 +110,11 @@ class PostDetailFragment : Fragment() {
                         commentViewModel.addComment(newComment)
                         binding.commentText.text.clear()
                     }
-                    if (postId != null) {
-                        reloadFragment(it)
-                    }
                 }
             }
         }
     }
 
-    private fun reloadFragment(it: View) {
-        val action = PostDetailFragmentDirections.actionPostDetailFragmentToPostDetailFragment(
-            postId!!
-        )
-        it.findNavController().navigate(action)
-    }
 
     private fun setLikePostListener() {
         binding.ivLike.setOnClickListener {
