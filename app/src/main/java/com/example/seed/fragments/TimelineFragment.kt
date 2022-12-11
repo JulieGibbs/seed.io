@@ -141,4 +141,8 @@ class TimelineFragment : Fragment() {
     fun likePost(postId: String){
         postViewModel.likePostByUser(postId, userId = userId);
     }
+
+    fun getUserId(): String {
+        return userId
+    }
 }

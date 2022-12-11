@@ -72,6 +72,12 @@ class PostDetailFragment : Fragment() {
                 binding.tvCommentCount.text = post.numberOfComments.toString()+" Comments"
                 binding.tvLabel.text = TagUtil().intToTag(post.tag)
 
+                if (post.likedBy.indexOf(firebaseAuth.currentUser!!.uid) >= 0) {
+                    binding.ivLike.setImageResource(R.mipmap.dropfilled)
+                } else {
+                    binding.ivLike.setImageResource(R.drawable.drop)
+                }
+
                 val dateFormat = SimpleDateFormat("yyyy-MM-dd hh:mm:ss")
                 val strDate: String = dateFormat.format(post.timestamp)
                 binding.tvDate.text = strDate

@@ -85,10 +85,6 @@ class ProfileFragment : Fragment() {
         binding.tvBio.text = "User not found"
     }
 
-    fun likePost(postId: String){
-        postViewModel.likePostByUser(postId, userId);
-    }
-
     override fun onStart() {
         super.onStart()
         adapter.startListening()
@@ -97,5 +93,13 @@ class ProfileFragment : Fragment() {
     override fun onStop() {
         super.onStop()
         adapter.stopListening()
+    }
+
+    fun likePost(postId: String){
+        postViewModel.likePostByUser(postId, userId);
+    }
+
+    fun getUserId(): String {
+        return userId
     }
 }

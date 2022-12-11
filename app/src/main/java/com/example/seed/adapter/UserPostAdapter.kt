@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.seed.R
 import com.example.seed.data.Post
 import com.example.seed.data.User
 import com.example.seed.databinding.PostRowBinding
@@ -51,6 +52,12 @@ class UserPostAdapter(private val context: ProfileFragment, query: Query?) : Fir
             binding.ivLike.setOnClickListener {
                 context.likePost(postId)
             }
+            if (post.likedBy.indexOf(context.getUserId()) >= 0) {
+                binding.ivLike.setImageResource(R.mipmap.dropfilled)
+            } else {
+                binding.ivLike.setImageResource(R.drawable.drop)
+            }
+
 
             binding.root.setOnClickListener {
                 val action = ProfileFragmentDirections.actionProfileFragmentToPostDetailFragment(postId)
