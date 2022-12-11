@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.seed.R
 import com.example.seed.data.Post
 import com.example.seed.data.User
 import com.example.seed.databinding.PostRowBinding
@@ -46,9 +47,17 @@ class TimelineAdapter(private val context: TimelineFragment, query: Query?) : Fi
             val longDate = post.timestamp?.time
             val ago = longDate?.let { DateUtils.getRelativeTimeSpanString(it, System.currentTimeMillis(), DateUtils.MINUTE_IN_MILLIS) }
             binding.tvTime.text = ago?.toString()
+
             binding.ivLike.setOnClickListener {
                 context.likePost(postId)
             }
+
+            if (post.likedBy.indexOf(context.getUserId()) >= 0) {
+                binding.ivLike.setImageResource(R.mipmap.dropfilled)
+            } else {
+                binding.ivLike.setImageResource(R.drawable.drop)
+            }
+
             binding.root.setOnClickListener {
                 val action = TimelineFragmentDirections.actionTimelineFragmentToPostDetailFragment(postId)
                 it.findNavController().navigate(action)
