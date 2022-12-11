@@ -22,12 +22,13 @@ class CommentViewModel(application: Application) : AndroidViewModel(application)
                 .addOnSuccessListener {
                     Log.d(LOG_TAG, "Successfully added comment")
                     Toast.makeText(getApplication(),
-                        "Post succeeded", Toast.LENGTH_SHORT).show()
+                        "Successfully added comment", Toast.LENGTH_SHORT).show()
                 }
                 .addOnFailureListener {
                     Log.d(LOG_TAG, "${it.message}")
                     Toast.makeText(getApplication(),
-                        "Could not add comment", Toast.LENGTH_SHORT).show()
+                        "Failed to add comment", Toast.LENGTH_SHORT).show()
+
                 }
 
             // increment like
