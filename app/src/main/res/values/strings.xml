@@ -1,10 +1,38 @@
 <resources>
     <string name="app_name">Seed</string>
     <string name="btnSignIn">Sign in with Google</string>
+    <string name="welcome_message">Welcome to Seed.io! 🌱</string>
+    <string name="username_tv_prompt">Username</string>
+    <string name="bio_tv_prompt">Bio</string>
+    <string name="save_btn_prompt">Save</string>
+    <string name="app_name_seedio">Seed.io</string>
+    <string name="timestamp_placeholder">8m ago</string>
+    <string name="contents_tv_placeholder">He\'ll want to use your yacht, and I don\'t want this thing smelling like fish.</string>
+    <string name="imageurl_tv_prompt">Image URL</string>
+    <string name="cancel_btn_prompt">Cancel</string>
+    <string name="post_btn_prompt">Post</string>
+    <string name="title_hint">Title</string>
+    <string name="content_hint">What’s brewing?</string>
+    <string name="tag_tv_placeholder">Tag</string>
+    <string name="content_tv_prompt">Content</string>
+    <string name="num_likes_placeholder">0 Drops</string>
+    <string name="num_comments_placeholder">0 Comments</string>
+    <string name="date_placeholder">0:00 PM 00/00/00</string>
+    <string name="comment_here_hint">Comment here...</string>
+    <string name="settings_btn">Settings</string>
+    <string name="username_profile_placeholder">\@Hashgas</string>
+    <string name="bio_profile_placeholder">Bio of person goes here. They like fishing, hiking, and long walks in the beach.</string>
+    <string name="posts_tv_label">Posts</string>
+    <string name="edit_profile_btn">Edit Profile</string>
+    <string name="logout_btn">Logout</string>
+    <string name="item_all">All</string>
+    <string name="item_fintech">Fintech</string>
+    <string name="item_web3">Web3</string>
+    <string name="item_biotech">Biotech</string>
     <string-array name="category_array">
-        <item>All</item>
-        <item>Fintech</item>
-        <item>Web3</item>
-        <item>Biotech</item>
+        <item>@string/item_all</item>
+        <item>@string/item_fintech</item>
+        <item>@string/item_web3</item>
+        <item>@string/item_biotech</item>
     </string-array>
 </resources>

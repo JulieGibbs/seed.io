@@ -17,7 +17,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="64dp"
             android:fontFamily="sans-serif-black"
-            android:text="Welome to Seed.io! 🌱"
+            android:text="@string/welcome_message"
             android:textSize="24sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -29,7 +29,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="64dp"
             android:fontFamily="sans-serif-black"
-            android:text="Username"
+            android:text="@string/username_tv_prompt"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/welcome" />
@@ -51,7 +51,7 @@
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
             android:fontFamily="sans-serif-black"
-            android:text="Bio"
+            android:text="@string/bio_tv_prompt"
             android:textSize="20sp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/etUsername" />
@@ -71,7 +71,7 @@
             android:layout_width="160dp"
             android:layout_height="60dp"
             android:layout_marginBottom="32dp"
-            android:text="Save"
+            android:text="@string/save_btn_prompt"
             app:backgroundTint="#3D8361"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
