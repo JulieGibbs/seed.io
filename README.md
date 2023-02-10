@@ -4,8 +4,7 @@
 <h3 align="center">
   An android mobile app that allow users to post and discuss ideas
 </h3>
-
-<img title="Mockup" src="https://user-images.githubusercontent.com/89917595/217586174-6d7e6442-3684-4ead-bb63-9e652fb7bd07.png" width=100%>
+<img title="Mockup" src="https://user-images.githubusercontent.com/89917595/217594701-d504fe36-e32b-4528-9a45-588951661053.png" width=100%>
 
 
 ### 🤔 Problem
